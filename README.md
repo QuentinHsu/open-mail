@@ -114,6 +114,10 @@ docker compose up --build -d
 - `env_file` 把变量注入进程环境
 - `./.env:/app/.env:ro` 让容器内也能读取同一份文件
 
+`PORT` 会同时控制：
+- Go 服务实际监听端口
+- Docker 对外映射端口
+
 当你修改 `.env` 后，重新执行下面的命令让容器重新创建：
 
 ```bash

@@ -17,7 +17,7 @@ services:
       DEFAULT_IMAP_TLS: ${DEFAULT_IMAP_TLS:-true}
       API_TOKEN: ${API_TOKEN:-}
     ports:
-      - "3000:3000"
+      - "${PORT:-3000}:${PORT:-3000}"
     volumes:
       - ./.data:/app/.data
       - ./.env:/app/.env:ro
