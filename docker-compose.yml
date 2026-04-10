@@ -1,0 +1,11 @@
+services:
+  open-mail:
+    build: .
+    container_name: open-mail
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./.data:/app/.data
