@@ -25,6 +25,23 @@ func NewNotifier(botToken string, allowedChatIDs map[int64]struct{}) (*Notifier,
 	return &Notifier{bot: bot, allowedChatIDs: allowedChatIDs}, nil
 }
 
+// RegisterCommands syncs the Telegram bot command menu with the service commands.
+func (n *Notifier) RegisterCommands() error {
+	commands := []tgbotapi.BotCommand{
+		{Command: "mailboxes", Description: "查看当前托管邮箱"},
+		{Command: "add", Description: "添加邮箱: /add 邮箱 密码 [显示名]"},
+		{Command: "update", Description: "更新邮箱: /update ID 邮箱 密码 [显示名]"},
+		{Command: "remove", Description: "删除邮箱: /remove ID"},
+		{Command: "help", Description: "查看帮助"},
+	}
+
+	config := tgbotapi.NewSetMyCommands(commands...)
+	if _, err := n.bot.Request(config); err != nil {
+		return fmt.Errorf("register telegram commands: %w", err)
+	}
+	return nil
+}
+
 // Bot returns the underlying Telegram bot client.
 func (n *Notifier) Bot() *tgbotapi.BotAPI {
 	return n.bot

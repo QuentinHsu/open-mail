@@ -43,6 +43,10 @@ func main() {
 		logger.Error("create telegram notifier", "error", err)
 		os.Exit(1)
 	}
+	if err := notifier.RegisterCommands(); err != nil {
+		logger.Error("register telegram bot commands", "error", err)
+		os.Exit(1)
+	}
 
 	mailboxService, err := mailbox.NewService(cfg, fileStore, cryptoService, imapClient, nil)
 	if err != nil {

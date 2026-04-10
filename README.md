@@ -5,6 +5,7 @@
 它支持：
 - 多个 Outlook 邮箱账号接入
 - Telegram 指令增删改查邮箱
+- 服务启动时自动注册 Telegram Bot 命令菜单
 - REST API 增删改查邮箱
 - 新邮件到达后自动推送主题、发件人和正文摘要到 Telegram
 - Docker / Docker Compose 部署
