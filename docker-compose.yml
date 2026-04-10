@@ -5,7 +5,19 @@ services:
     restart: unless-stopped
     env_file:
       - .env
+    environment:
+      PORT: ${PORT}
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN}
+      TELEGRAM_ALLOWED_CHAT_IDS: ${TELEGRAM_ALLOWED_CHAT_IDS}
+      MAILBOX_ENCRYPTION_KEY: ${MAILBOX_ENCRYPTION_KEY}
+      DATA_DIR: ${DATA_DIR:-.data}
+      POLL_INTERVAL: ${POLL_INTERVAL:-1m}
+      DEFAULT_IMAP_HOST: ${DEFAULT_IMAP_HOST:-outlook.office365.com}
+      DEFAULT_IMAP_PORT: ${DEFAULT_IMAP_PORT:-993}
+      DEFAULT_IMAP_TLS: ${DEFAULT_IMAP_TLS:-true}
+      API_TOKEN: ${API_TOKEN:-}
     ports:
       - "3000:3000"
     volumes:
       - ./.data:/app/.data
+      - ./.env:/app/.env:ro

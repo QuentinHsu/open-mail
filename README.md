@@ -110,6 +110,16 @@ go run ./cmd/open-mail
 docker compose up --build -d
 ```
 
+容器会通过两种方式读取同一份根目录 `.env`：
+- `env_file` 把变量注入进程环境
+- `./.env:/app/.env:ro` 让容器内也能读取同一份文件
+
+当你修改 `.env` 后，重新执行下面的命令让容器重新创建：
+
+```bash
+docker compose up -d --force-recreate
+```
+
 ## 后续行为
 
 - 新增邮箱时会立即校验 IMAP 登录
